@@ -1,11 +1,11 @@
-package GUI;
+package Observer;
 
 import Observer.EventListener;
 
 import javax.swing.*;
 import java.util.Map;
 
-class CreationListenerGUI implements EventListener {
+public class CreationListenerGUI implements EventListener {
     JTextArea text;
 
     public CreationListenerGUI(JTextArea text) {

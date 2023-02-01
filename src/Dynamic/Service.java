@@ -4,28 +4,28 @@ import Main.Actor;
 import Messages.AddInsultMessage;
 import Messages.GetAllInsultsMessage;
 import Messages.GetInsultMessage;
+import Proxy.ActorProxy;
 
 /**
  * http://javahowto.blogspot.com.es/2011/12/java-dynamic-proxy-example.html
  */
 
-public class TestImpl implements TestIF {
+public class Service implements InsultService {
     Actor a;
-    public Actor getAllInsults() {
-        a.send(new GetAllInsultsMessage(a,"Give me all insults!"));
+    public Actor getAllInsults(ActorProxy act) {
+        a.send(new GetAllInsultsMessage(act,"Give me all insults!"));
         return a;
     }
-    public Actor addInsult(String insult) {
+    public Actor addInsult(ActorProxy act, String insult) {
         a.send(new AddInsultMessage(a,insult));
         return a;
     }
 
-    public Actor getInsult(){
-        a.send(new GetInsultMessage(a, "Give me an insult!"));
+    public Actor getInsult(ActorProxy act){
+        a.send(new GetInsultMessage(act, "Give me an insult!"));
         return a;
     }
 
-    @Override
     public Object setActor(Actor a) {
         this.a = a;
         System.out.println("The actor is "+ a.getActorName());

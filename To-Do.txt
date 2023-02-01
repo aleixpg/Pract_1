@@ -1,21 +1,26 @@
-Base: run debe implementarse solo una vez, implementaciones especificas de actores implementan un metodo abstracto “process”
+o -> Base: run debe implementarse solo una vez, implementaciones especificas de actores implementan
+    un metodo abstracto “process”
 
-Proxy: el mismo proxy debería implementar la lógica para poder responder desde el main mediante el método receive, el cliente debe usar solo la clase proxy directamente, no instanciar otro proxy por separado (igual que ejemplo del enunciado).
+o -> Proxy: el mismo proxy debería implementar la lógica para poder responder desde el main mediante
+    el método receive, el cliente debe usar solo la clase proxy directamente, no instanciar otro
+    proxy por separado (igual que ejemplo del enunciado).
 
-Decorator: Falta lambda decorator.
+o -> Decorator: Falta lambda decorator.
 
-DyanimcProxy: El dynamic proxy debe recibir respuesta si el método retorna algo diferente de void.
+o -> DyanimcProxy: El dynamic proxy debe recibir respuesta si el método retorna algo diferente de void.
 
-ReflectiveActor: no
+o -> ReflectiveActor: no
 
-Observer: traffic debe actualizarse mediante los eventos de los actores que estan siendo monitorizados.
+x -> Observer: traffic debe actualizarse mediante los eventos de los actores que estan siendo monitorizados.
 
-Javadocs: no
+o -> Javadocs: no
 
-Tests: Se debe usar assert. Faltan mas tests.
+o -> Tests: Se debe usar assert. Faltan mas tests.
 
-RMI: no
+o -> RMI: no
 
-Factory: no
+o -> Factory: no
 
-Github:  no
+x -> Github:  no
+
+o -> Blocking Queue

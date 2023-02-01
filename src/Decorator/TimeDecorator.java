@@ -1,4 +1,7 @@
-import Decorator.ActorDecorator;
+package Decorator;
+
+import Main.Actor;
+import Messages.Message;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -10,29 +13,13 @@ public class TimeDecorator extends ActorDecorator {
     }
 
     @Override
-    public Message process() {
-        //Pre
-        SimpleDateFormat formatter= new SimpleDateFormat("'['HH:mm']' ");
-        Date date = new Date(System.currentTimeMillis());
-        String newBody = formatter.format(date);
-
-        //body
-        Message msg = super.process();
-
-        //Post
-        newBody += msg.getBody();
-        msg.setBody(newBody);
-
-        System.out.println("time decorator");
-
-        return msg;
+    public Message process(Message msg) {
+        return super.process(msg);
     }
-
 
     @Override
     public void send(Message msg) {
-        System.out.println("time decorator");
-
+        //Pre
         SimpleDateFormat formatter= new SimpleDateFormat("'['HH:mm']' ");
         Date date = new Date(System.currentTimeMillis());
         String newBody = formatter.format(date);
@@ -40,9 +27,11 @@ public class TimeDecorator extends ActorDecorator {
 
         msg.setBody(newBody);
         System.out.println(msg.getBody());
+
+        //body
         super.send(msg);
-        //actor.send(msg);
-        //this.mailbox.add(msg);
+
+        //Post
     }
 
 }

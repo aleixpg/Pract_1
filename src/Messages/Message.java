@@ -1,3 +1,7 @@
+package Messages;
+
+import Main.Actor;
+
 public class Message {
 
     private Actor from;

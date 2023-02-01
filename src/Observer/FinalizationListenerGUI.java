@@ -1,4 +1,4 @@
-package GUI;
+package Observer;
 
 import Main.ActorContext;
 import Observer.EventListener;
@@ -6,7 +6,7 @@ import Observer.EventListener;
 import javax.swing.*;
 import java.util.Map;
 
-class FinalizationListenerGUI implements EventListener {
+public class FinalizationListenerGUI implements EventListener {
     JTextArea text;
 
     public FinalizationListenerGUI(JTextArea text) {

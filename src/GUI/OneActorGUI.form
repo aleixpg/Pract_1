@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="GUI.OneActorGUI">
+  <grid id="27dc6" layout-manager="GridLayoutManager" row-count="5" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="500" height="400"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <grid id="1346e" binding="destination" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="d4f73" class="javax.swing.JLabel" binding="selectDestination">
+            <constraints/>
+            <properties>
+              <text value="Select the actor destination"/>
+            </properties>
+          </component>
+          <hspacer id="abc1">
+            <constraints/>
+          </hspacer>
+          <component id="617ed" class="javax.swing.JComboBox" binding="listDestination">
+            <constraints/>
+            <properties/>
+          </component>
+        </children>
+      </grid>
+      <grid id="e8b59" binding="message" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="1a9a8" class="javax.swing.JLabel" binding="selectMessage">
+            <constraints/>
+            <properties>
+              <text value="Select which type of message: "/>
+            </properties>
+          </component>
+          <hspacer id="991ce">
+            <constraints/>
+          </hspacer>
+          <component id="e44f8" class="javax.swing.JComboBox" binding="listMessages">
+            <constraints/>
+            <properties/>
+          </component>
+        </children>
+      </grid>
+      <grid id="36c9d" binding="textMessageLine" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="ea2b6" class="javax.swing.JLabel" binding="messageTextLabel">
+            <constraints/>
+            <properties>
+              <text value="Write your message: "/>
+            </properties>
+          </component>
+          <hspacer id="63ba5">
+            <constraints/>
+          </hspacer>
+          <component id="e48e7" class="javax.swing.JTextField" binding="textMessage">
+            <constraints/>
+            <properties>
+              <columns value="7"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="ac7d8" binding="buttons" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+        <constraints>
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="fc58c" class="javax.swing.JButton" binding="sendButton">
+            <constraints/>
+            <properties>
+              <text value="Send"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="4316a" binding="statisticsLayout" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="de074" class="javax.swing.JLabel" binding="numSent">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Number of sent messages: "/>
+            </properties>
+          </component>
+          <component id="749c4" class="javax.swing.JLabel" binding="numRecv">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Number of received messages: "/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+    </children>
+  </grid>
+</form>

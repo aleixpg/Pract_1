@@ -1,59 +1,92 @@
-import Decorator.*;
+package Main;
+
+import Actors.*;
+import Messages.*;
+import Observer.*;
+import Proxy.*;
+import Dynamic.*;
+
+import java.lang.reflect.Proxy;
+
 public class Main {
 
-    public static void main(String[] args) throws InterruptedException {
-        //Impossible to create instances using "new"
-        //ActorContext actorContext=new ActorContext();
+    public static void main(String[] args){
+
         ActorContext actorContext = ActorContext.getInstance();
-        Actor pere = actorContext.spawnActor("Pere", new HelloWorldActor("Pere"));
-        Actor moya = actorContext.spawnActor("Moya", new InsultActor("Moya"));
-        Actor main = actorContext.spawnActor("Main", new MainActor("Main"));
+        EventManager eventManager = EventManager.getInstance();
 
-        ActorProxy pauProxy = new ActorProxy(actorContext.spawnActor("Pau", new HelloWorldActor("Pere")));
+        eventManager.subscribe("Creation", new CreationListener());
+        eventManager.subscribe("Finalization", new FinalizationListener());
+        eventManager.subscribe("IncorrectFinalization", new IncorrectFinalizationListener());
+        eventManager.subscribe("MessageReceived", new MessageReceivedListener());
+        eventManager.subscribe("ProxyMessage", new ProxyMessageListener());
 
-        main = new TimeDecorator(main);
-
-        //pere = new TimeDecorator(pere);
-        //pere = new EncryptionDecorator(pere);
-
-        //moya = new EncryptionDecorator(moya);
-        //moya = new TimeDecorator(moya);
-
-        //pauProxy = new TimeDecorator(pauProxy);
-
-        //pere.send(new NormalMessage(main,"Hello World"));
-        //moya.send(new QuitMessage(main,""));
-
-        moya.send(new GetInsultMessage(main,""));
-        //Message resultM = moya.process();
-        //System.out.println(resultM.getBody());
-        moya.send(new QuitMessage(main,"kill"));
-
-        moya.send(new AddInsultMessage(main,"jodido"));
-        //resultM = moya.process();
-        //System.out.println(resultM.getBody());
-        moya.send(new GetAllInsultsMessage(main,""));
-        //resultM = moya.process();
-        //System.out.println(resultM.getBody());
-        //moya.interrupt();
+        eventManager.monitorActor("Pedro");
+        eventManager.monitorActor("Moya");
 
 
-        //actorContext2 = actorContext --> both are the same instance, according to Singleton
-        ActorContext actorContext2 = ActorContext.getInstance();
+        //ActorProxy pere = actorContext.spawnActor("Pere", new HelloWorldActor());
+        //ActorProxy pau = actorContext.spawnActor("Pau", new HelloWorldActor());
+        //ActorProxy moya = actorContext.spawnActor("Moya", new InsultActor());
+        ActorProxy pere = actorContext.spawnActor("Pedro", new InsultActor());
+        //ActorProxy moya = actorContext.spawnActor("Moya", new EncryptionDecorator(new InsultActor()));
+        //ActorProxy pedro = actorContext.spawnActor("Pedro", new EncryptionDecorator(new InsultActor()));
+        //ActorProxy moya = actorContext.spawnActor("Moya", new FirewallDecorator(new EncryptionDecorator(new InsultActor())));
+        //ActorProxy pedro = actorContext.spawnActor("Pedro", new FirewallDecorator(new EncryptionDecorator(new InsultActor())));
+        ActorProxy moya = actorContext.spawnActor("Moya", new InsultActor());
+        //ActorProxy pedro = actorContext.spawnActor("Pedro", new FirewallDecorator(new InsultActor()));
+        //ActorProxy dynamic = actorContext.spawnActor("Dyna", new InsultActor());
+        //ActorProxy gin = actorContext.spawnActor("Gin", new InsultActor());
+        //ActorProxy main = actorContext.spawnActor("Main", new MainActor());
+        Actor main = new MainProxy();
 
-        System.out.println("Name of all actors:");
-        for (String name: actorContext2.getNames()) {
-            System.out.println(name);
 
+        //eventManager.subscribe("Firewall", new FirewallListener());
+
+
+        System.out.println(eventManager.getNumberofMessages(moya));
+
+        sleep(2);
+
+        InsultService t = (InsultService) Proxy.newProxyInstance(InsultService.class.getClassLoader(),
+                new Class<?>[] {InsultService.class},
+                new DynamicProxy(new Service()));
+        ActorProxy dani = actorContext.spawnActor("Dani", new InsultActor());
+        sleep(2);
+        t.setActor(dani);
+        sleep(2);
+        t.addInsult(moya, "Inutil");
+        sleep(2);
+        t.getInsult(moya);
+        sleep(2);
+        t.getAllInsults(moya);
+        sleep(2);
+
+
+    }
+
+    public static void sleep(int sec) {
+        try {
+            Thread.sleep(sec * 1000);
+        } catch (InterruptedException ex) {
+            System.out.println(ex);
+            Thread.currentThread().interrupt();
         }
+    }
 
-        Thread.sleep(2000);
-        //pere.send(new AddInsultMessage(main,"Hello World"));
-        //pere.send(new QuitMessage(main,""));
-        //moya.send(new QuitMessage(main,""));
-        main.send(new QuitMessage(main,"kill"));
+    public static void pass() {
 
+    }
 
+    public static String createMessage(Message msg, String actorName) {
+        String from = "";
+        String eventMsg = "";
+
+        //Create message
+        from += (msg.getFrom() == null) ? "null" : msg.getFrom().getActorName();
+        eventMsg += "[ " + from + " ] sent a message to [ " + actorName + " ] --> "+msg.getBody();
+
+        return eventMsg;
     }
 
 }

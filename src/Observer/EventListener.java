@@ -1,12 +1,8 @@
 package Observer;
 
-import Messages.Message;
+import java.io.Serializable;
+import java.util.Map;
 
-public interface ActorListener {
-
-    public void notifyCreation(String name);
-    public void notifyFinalization(String name);
-    public void notifyIncorrectFinalization(String name);
-    public void notifyMessageReceived(Message message, String name);
-
+public interface EventListener {
+    void update(String eventType, String name, String msg, Map map);
 }

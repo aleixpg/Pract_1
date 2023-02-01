@@ -1,11 +1,11 @@
-package GUI;
+package Observer;
 
 import Observer.EventListener;
 
 import javax.swing.*;
 import java.util.Map;
 
-class MessageReceivedListenerGUI implements EventListener {
+public class MessageReceivedListenerGUI implements EventListener {
     JTextArea text;
 
     public MessageReceivedListenerGUI(JTextArea text) {

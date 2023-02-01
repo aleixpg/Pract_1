@@ -5,39 +5,64 @@ package Dynamic;
  *
  */
 
+import Main.Actor;
+import Main.*;
+import Messages.AddInsultMessage;
+import Messages.GetAllInsultsMessage;
+import Messages.GetInsultMessage;
+
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.lang.reflect.Proxy;
 
-public class TestInvocationHandler implements InvocationHandler {
+public class DynamicProxy implements InvocationHandler {
+
+    private Actor a;
     private Object testImpl;
 
-    public TestInvocationHandler(Object impl) {
+    public DynamicProxy(Object impl) {
         this.testImpl = impl;
     }
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args)
             throws Throwable {
-        Object invocationResult = null;
         try
         {
+            Actor c;
             System.out.println("");
             System.out.println("Before method " + method.getName() + ":");
-            invocationResult = method.invoke(this.testImpl, args);
+            switch (method.getName()){
+                case "getAllInsults":
+                    c = (Actor) args[0];
+                    a.send(new GetAllInsultsMessage(c,"Give me all insults!"));
+                    Main.sleep(4);
+                    break;
+                case "addInsult":
+                    c = (Actor) args[0];
+                    a.send(new AddInsultMessage(c,(String) args[1]));
+                    Main.sleep(4);
+                    break;
+                case "getInsult":
+                    c = (Actor) args[0];
+                    a.send(new GetInsultMessage(c, "Give me an insult!"));
+                    Main.sleep(4);
+                    break;
+                case "setActor":
+                    c = (Actor) args[0];
+                    this.a = c;
+                    System.out.println("The actor is "+ c.getActorName());
+                    Main.sleep(4);
+                    break;
+            }
             System.out.println("After method " + method.getName() + ":");
-        }
-        catch(InvocationTargetException ite)
-        {
-            throw ite.getTargetException();
         }
         catch(Exception e)
         {
             System.err.println("Invocation of " + method.getName() + " failed");
         }
         finally{
-            return invocationResult;
+            return a;
         }
     }
 }

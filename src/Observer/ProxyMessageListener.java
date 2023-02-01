@@ -1,19 +1,17 @@
 package Observer;
 
-import Proxy.ActorProxy;
-
 import java.util.List;
 import java.util.Map;
 
-public class MessageReceivedListener implements EventListener{
+public class ProxyMessageListener implements EventListener{
 
-    public MessageReceivedListener() {}
+    public ProxyMessageListener() {}
 
     @Override
     public void update(String eventType, String name, String msg, Map map) {
         List<String> actorsCreate = (List<String>) map.get("CREATED");
         actorsCreate.add(name+":"+eventType);
-        System.out.println("An actor called "+name+" has received a message...\n└--> "+msg);
+        System.out.println(name+" actor's PROXY has received a message...\n└--> "+msg);
         actorsCreate = (List<String>) map.get("STOPPED");
         actorsCreate.add(name+":"+eventType);
         //System.out.println("└--> "+msg);

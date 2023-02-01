@@ -2,9 +2,9 @@ package Messages;
 
 import Main.Actor;
 
-public class QuitMessage extends Message{
+public class OkMessage extends Message{
 
-    public QuitMessage(Actor from, String body) {
+    public OkMessage(Actor from, String body) {
         super(from, body);
     }
 }
